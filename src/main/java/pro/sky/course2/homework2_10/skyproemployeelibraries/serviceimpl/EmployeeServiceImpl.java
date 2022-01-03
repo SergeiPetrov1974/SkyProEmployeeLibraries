@@ -1,7 +1,6 @@
 package pro.sky.course2.homework2_10.skyproemployeelibraries.serviceimpl;
 
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import pro.sky.course2.homework2_10.skyproemployeelibraries.data.Employee;
 import pro.sky.course2.homework2_10.skyproemployeelibraries.exceptions.ErrorInLine;
 import pro.sky.course2.homework2_10.skyproemployeelibraries.exceptions.EmployeeNotFoundException;
@@ -10,6 +9,9 @@ import pro.sky.course2.homework2_10.skyproemployeelibraries.service.EmployeeServ
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.apache.commons.lang3.StringUtils.isAlpha;
+import static org.springframework.util.StringUtils.*;
 
 @Service
 public class EmployeeServiceImpl implements DepartmentService, EmployeeService {
@@ -47,7 +49,7 @@ public class EmployeeServiceImpl implements DepartmentService, EmployeeService {
 
     @Override
     public boolean isStringDigit(String str) {
-        if (org.apache.commons.lang3.StringUtils.isAlpha(str)) {
+        if (isAlpha(str)) {
             return true;
         } else {
             throw new ErrorInLine();
@@ -57,7 +59,7 @@ public class EmployeeServiceImpl implements DepartmentService, EmployeeService {
     @Override
     public void addEmployee(String firstName, String lastName) {
         if (isStringDigit(firstName) && isStringDigit(lastName)) {
-            employees.put(getId(), new Employee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName)));
+            employees.put(getId(), new Employee(capitalize(firstName), capitalize(lastName)));
         }
     }
 
